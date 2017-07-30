@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学生成绩单</title>
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+    <style>
+        .head{
+            margin-left:0 ;
+            width: 100px;
+
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+        }
+        .table {
+            width: 50% ;
+            max-width: 100%;
+            margin-bottom: 20px;
+            margin-left: 0;
+            text-align: center;
+            border-width: 2px;
+        }
+
+        .question{
+            margin-left: 370px; ;
+        }
+        .inputStyle{
+            width: 800px;
+            margin:auto ;
+        }
+        .input-1{
+            text-align: center;
+            width: 70px;
+            border-width: 3px;
+            margin-top: 9px;
+            margin: 5px;
+
+        }
+        td{
+           padding: 5px;
+        }
+        .input-2{
+            width: 400px;
+        }
+        .input-3{
+            border-width: 3px;
+            margin: 5px;
+        }
+        .nav-tabs {
+            border-bottom: 1px solid #ddd;
+            width: 800px;
+            margin: auto;
+        }
+
+        .blue {
+            color: #d9eef7;
+            border: solid 1px #0076a3;
+            background: #0095cd;
+            background: -webkit-gradient(linear, left top, left bottom, from(#00adee), to(#0078a5));
+            background: -moz-linear-gradient(top, #00adee, #0078a5);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00adee', endColorstr='#0078a5');
+        }
+
+        .button {
+            display: inline-block;
+            zoom: 1;
+            vertical-align: baseline;
+            margin: 0 2px;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            font: 14px/100% Arial, Helvetica, sans-serif;
+            padding: .5em 2em .55em;
+            text-shadow: 0 1px 1px rgba(0,0,0,.3);
+            -webkit-border-radius: .5em;
+            -moz-border-radius: .5em;
+            border-radius: .5em;
+            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            -moz-box-shadow: 0 1px 2px rgba(0,0,0,.2);
+            box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+    </style>
+</head>
+
+<body>
+
+<ul  class="nav nav-tabs" role="tablist" id="myTab">
+    <li class="active">
+        <a href="#add" data-toggle="tab">
+            添加一个学生
+        </a>
+        </li>
+    <li><a href="#view" data-toggle="tab">查看学生成绩</a></li>
+    <li><a href="#change" data-toggle="tab">修改学生成绩</a></li>
+</ul>
+<br>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="add">
+        <div class="inputStyle">
+                <table >
+                    <tr>
+                        <td>姓名：<input class="input-3" type="text" id="name"></td>
+                        <td>学号：<input class="input-3" type="text" id="id"></td>
+                    </tr>
+                    <tr>
+                        <td>班级：<input class="input-3" type="text" id="klass" onkeyup="checkNum(this)"></td>
+                        <td>民族：<input class="input-3" type="text" id="nation"></td>
+                    </tr>
+                    <tr>
+                        <td>语文：<input class="input-3" type="number" id="chinese"></td>
+                        <td>数学：<input class="input-3" type="number" id="math"></td>
+                    </tr>
+                    <tr>
+                        <td>英语：<input class="input-3" type="number" id="english"></td>
+                        <td>编程：<input class="input-3" type="number" id="code"></td>
+                    </tr>
+                </table>
+                <br>
+
+
+                <input type ="button" class="blue button" value="确认" id="sendStu">
+
+        </div>
+    </div>
+    <div class="tab-pane fade question inputStyle" id="view">
+        <h2 >成绩单</h2>
+        <input type="text" class="input-2 input-3" id="check" placeholder="请输入要操作的学生的学号(空格隔开)">
+        <input type="button"class="blue button" id="search" value="确认" >
+        <br>
+        <div >
+            <table class="table table-bordered" id="stuTable">
+
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade question inputStyle" id="change">
+        <br>
+
+        <input class="input-2 input-3" type="text" id="changeText" placeholder="请输入要操作的学生的学号(空格隔开)"></input>
+        <input class="blue button" type="submit" id="submit-change" value="确认">
+        <br>
+        <br>
+        <table class="table table-bordered" id="changeTable">
+
+        </table>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.bootcss.com/bootbox.js/4.4.0/bootbox.min.js"></script>
+<script src="myFunctions.js"></script>
+</body>
+<script>
+    function checkNum(obj) {
+        if(isNaN(obj.value)){
+            alert("请输入数字")
+        }
+    }
+</script>
+</html>
