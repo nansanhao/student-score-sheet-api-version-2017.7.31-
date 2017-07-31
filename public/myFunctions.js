@@ -11,27 +11,38 @@ $(document).ready(function () {
         let math=$('#math').val();
         let english=$('#english').val();
         let code=$('#code').val();
-        let find=0;
-        $.get('/allStudent',function (ans) {
-            let students=ans;
-            for(let i=0;i<students.length;i++){
-                if(students[i].id==id){
-                    find=1;
+
+        if((name=='')||(id=='')||(nation=='')||(klass=='')||(chinese=='')||(math=='')||(english=='')||(code=='')){
+            alert("您输入的信息不完整");
+        }else {
+            $.get('/allStudent',function (ans) {
+                let students=ans;
+                let find=0;
+                for(let i=0;i<students.length;i++){
+                    if(students[i].id==id){
+                        find=1;
+                        break;
+                    }
                 }
-            }
 
 
 
-            if(find==0){
-                let newStu=new Student(name,id,nation,klass,math,chinese,english,code);
-                $.post('/student',newStu,function (ans) {
-                    // alert(JSON.stringify(newStu));
-                });
-                alert(`学生${newStu.name}的成绩已成功添加`)
-            }else {
-                alert(`请不要重复添加学生${newStu.name}`)
-            }
-        });
+                if(find==0){
+
+
+                    let newStu=new Student(name,id,nation,klass,math,chinese,english,code);
+                    $.post('/student',newStu,function (ans) {
+                        // alert(JSON.stringify(newStu));
+                    });
+                    alert(`学生${newStu.name}的成绩已成功添加`)
+
+
+                }else {
+                    alert(`请不要重复添加学生${name}`);
+                }
+            });
+        }
+
 
 
         //alert(code);
@@ -112,8 +123,10 @@ $(document).ready(function () {
     $(document).click(function(e) { // 在页面任意位置点击而触发此事件
        if(/delete/.test($(e.target).attr("id"))==true){
            e.target.parentNode.parentNode.remove();
+
            $.post('/allStudent/id',{id:$(e.target).attr("id").match(/\d+/g)[0]},function (ans) {
                // alert(JSON.stringify(newStu));
+               alert(`成功删除该学生`);
            });
        }
        if(/modify/.test($(e.target).attr("id"))==true){
